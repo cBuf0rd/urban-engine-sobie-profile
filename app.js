@@ -10,7 +10,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 // mongo db
 const { MongoClient, ServerApiVersion } = require('mongodb');
 const uri = process.env.MONGO_URI;
-console.log(uri);
+//console.log(uri);
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 const client = new MongoClient(uri, {
   serverApi: {
@@ -32,7 +32,27 @@ async function run() {
   }
 }
 run().catch(console.dir);
+
+async function getData(){
+  await client.connect();
+  let collection = await client.db("guitar-app-database").collection("guitar-app-songs");
+  let results = await collection.find({}).toArray();
+    
+  console.log(results);
+  return results;
+}
+
 //endpoint, middleware(s)
+
+app.get('/read', async function(req,res){
+  let getDataResults = await getData();
+  console.log(getDataResults);
+  res.render('songs',
+    {songData : getDataResults}
+  );
+
+})
+
 app.get('/', function (req, res) {
   res.sendFile('index.html');
 })
@@ -71,3 +91,10 @@ app.listen(port,
     `server is running on ... ${port}`
   )
 );
+/*  
+"npm i express"
+"npm i body-parser"
+"npm i ejs"
+"npm i mongodb"
+"npm i dotenv"
+*/
