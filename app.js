@@ -3,6 +3,7 @@ require('dotenv').config()
 const app = express()
 const port = process.env.PORT || 3000;
 const bodyParser = require('body-parser')
+const { ObjectId } = require('mongodb')
 
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/public'))
@@ -52,7 +53,49 @@ app.get('/read', async function(req,res){
   );
 
 })
+app.get('/insert', async (req,res)=> {
 
+  //console.log('in /insert');
+  let newSong = req.query.myName;
+  console.log(newSong);
+  //connect to db,
+  await client.connect();
+  //point to the collection 
+  await client.db("guitar-app-database").collection("guitar-app-songs").insertOne({ song_name: newSong});
+  
+  //insert into it
+  res.redirect('/read');
+
+}); 
+
+app.post('/delete/:id', async (req,res)=>{
+
+  console.log("req.parms.id: ", req.params.id)
+
+  client.connect; 
+  const collection = client.db("guitar-app-database").collection("guitar-app-songs");
+  let result = await collection.findOneAndDelete( 
+  {"_id": new ObjectId(req.params.id)})
+
+.then(result => {
+  console.log(result); 
+  res.redirect('/read');
+})
+})
+app.post('/update', async (req,res)=>{
+
+  console.log("req.body: ", req.body)
+
+  client.connect; 
+  const collection = client.db("guitar-app-database").collection("guitar-app-songs");
+  let result = await collection.findOneAndUpdate( 
+  {"_id": new ObjectId(req.body.nameID)}, { $set: {"fname": req.body.inputUpdateName } }
+)
+.then(result => {
+  console.log(result); 
+  res.redirect('/read');
+})
+});  
 app.get('/', function (req, res) {
   res.sendFile('index.html');
 })
@@ -97,4 +140,8 @@ app.listen(port,
 "npm i ejs"
 "npm i mongodb"
 "npm i dotenv"
+git status
+git add . 
+git commit -m""
+git push
 */
