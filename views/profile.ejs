@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Candice's Sobie Profile</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css'>
+  <link rel="stylesheet" href="styles/style.css">
+  </head>
+<body>
+<main>
+   
+    <section class="container mt-5">
+        <h2 class="text-center">About Me</h2>
+        <div class="row mt-4">
+          <!-- Personal Card 1 -->
+          <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card">
+              <img src="https://private-user-images.githubusercontent.com/156353278/412191030-7e8d8e64-a9a4-44eb-b763-2373685d5a2d.jpeg?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MzkzMTM2ODUsIm5iZiI6MTczOTMxMzM4NSwicGF0aCI6Ii8xNTYzNTMyNzgvNDEyMTkxMDMwLTdlOGQ4ZTY0LWE5YTQtNDRlYi1iNzYzLTIzNzM2ODVkNWEyZC5qcGVnP1gtQW16LUFsZ29yaXRobT1BV1M0LUhNQUMtU0hBMjU2JlgtQW16LUNyZWRlbnRpYWw9QUtJQVZDT0RZTFNBNTNQUUs0WkElMkYyMDI1MDIxMSUyRnVzLWVhc3QtMSUyRnMzJTJGYXdzNF9yZXF1ZXN0JlgtQW16LURhdGU9MjAyNTAyMTFUMjIzNjI1WiZYLUFtei1FeHBpcmVzPTMwMCZYLUFtei1TaWduYXR1cmU9ZTY1OGY0MWM3YjQ0OTdlZDczOTIzNWZmN2NlZTI1MjY2MGQxYjZiM2E3OTg5ZTAyOTg4NzU0YTg2YWYzOTZmZCZYLUFtei1TaWduZWRIZWFkZXJzPWhvc3QifQ.td2QYUAj7Icqv8A4uUOBGJsBya5mhhvq_bekH0M5BmY" class="card-img-top" alt="Card Image">
+              <div class="card-body">
+                <h5 class="card-title">Candice Buford</h5>
+                <p class="card-text">Senior from Olive Branch, Mississippi
+                    <br>Major: Information Technology 
+                    <br>Concentrations: Software Development and HCI/UX 
+                    <br>Minor: Computer Science
+                    <br>
+                </p>
+              </div>
+            </div>
+          </div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <div class="container">
+            <a href="https://www.linkedin.com/in/candice-buford-3907222b7/" target="_blank"><img src="https://roarlions.com/images/2023/10/20/candace_buford.png?width=300" alt="Profile Picture" class="rounded-circle" id="profile-pic"></a>
+            <a class="navbar-brand" href="https://www.linkedin.com/in/candice-buford-3907222b7/" target="_blank">Candice Buford</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item">
+                <a class="nav-link active" href="https://github.com/cBuf0rd/glowing-meme-foxtrot">GitHub</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    <main id="profile">
+    <h3>My skills</h3>
+        <form method="POST" action="insert/">
+          <input name="title">
+          <input name="post">
+          <button role="submit">new post</button>
+        </form>
+    
+        
+        <% mongoResults.forEach(result=> { %>
+          <div class="col-md-8">
+          
+    
+        <form method="POST" action="update/">
+          <input name="updateTitle" value="<%= result.title %>">
+          <input name="updatePost" value="<%= result.post %>"> 
+          <input type="hidden" name="updateId" value="<%=result._id %>">
+          <button role="submit"><i class="bi bi-pencil"></i></button>
+        </form>
+        
+    
+    
+        <form method="POST" action="delete/">
+          <input type="hidden" name="deleteId" value="<%=result._id %>">
+          <button role="submit"><i class="bi bi-trash3"></i></button>
+        </form>
+    
+    
+      </div>
+        <% }); %>
+    
+    
+      </main>
+
+    
+      <footer class="footer bg-body-tertiary text-center text-lg-start fixed-bottom">
+        <!-- Copyright -->
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.05);">
+         Candice Buford © 2025
+          |
+          <!-- Copyright -->
+        </div>
+      </footer>
+      
+      <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js'></script>
+      <script src='https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.3/jquery-ui.min.js'></script>
+      <script src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.min.js'></script>
+      <script src="scripts/script.js"></script>
+</body>
+</html>
